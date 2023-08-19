@@ -29,7 +29,8 @@ class Bot:
         response = session.get(
             f"https://m.youtube.com/watch?v={live_id}",
             headers=headers,
-            proxies=self.proxy.next_proxy()
+            proxies=self.proxy.next_proxy(),
+            verify=False
         )
         logger.info(f"Ended GET for watch watch url of Youtube Video {live_id}")
         data = response.text
@@ -58,7 +59,8 @@ class Bot:
         session.get(
             url,
             headers=headers,
-            proxies=self.proxy.next_proxy()
+            proxies=self.proxy.next_proxy(),
+            verify=False
         )
 
         if base_url:

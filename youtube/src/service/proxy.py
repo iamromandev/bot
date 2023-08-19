@@ -13,4 +13,4 @@ class Proxy:
 
     def next_proxy(self) -> dict:
         proxy = random.choice(self.proxies)
-        return {"https": f"https://{proxy}"}
+        return {"http": f"http://{proxy}"}
