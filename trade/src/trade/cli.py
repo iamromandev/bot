@@ -14,7 +14,7 @@ def _version_callback(value: bool) -> None:
 
 
 @app.callback()
-def main(
+def start(
     version: Optional[bool] = typer.Option(
         None,
         "--version",
@@ -25,3 +25,7 @@ def main(
     )
 ) -> None:
     return
+
+
+def main():
+    app(prog_name=__app_name__)
