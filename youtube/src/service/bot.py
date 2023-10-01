@@ -64,5 +64,6 @@ class Bot:
         )
 
         if base_url:
+            logger.info(url)
             logger.info(args)
             # logger.info(base_url)
