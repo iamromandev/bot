@@ -1,6 +1,6 @@
 from typing import Optional
 
-from .enum import State
+from trade.trade.enum import State
 
 
 class Worker:
@@ -14,3 +14,4 @@ class Worker:
             state = None
 
     def _worker(self, old_state: Optional[State]) -> State:
+        pass

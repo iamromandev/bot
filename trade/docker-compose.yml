@@ -1,8 +1,8 @@
 services:
-  web:
+  server:
     platform: linux/arm64
-    hostname: web
-    container_name: web
+    hostname: server
+    container_name: server
     restart: unless-stopped
     build:
       context: .
@@ -14,13 +14,15 @@ services:
         PYTHON_VERSION: 3.9.16
         POETRY_VERSION: 1.5.1
     ports:
-      - 8000:8000
+      - 8010:8000
     volumes:
       - .:/workdir
     networks:
-      - web
+      - server
+    command: ["src", "trade"]
+
 
 networks:
-  web:
-    name: web
+  server:
+    name: server
     driver: bridge
