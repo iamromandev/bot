@@ -19,7 +19,7 @@ services:
       - .:/workdir
     networks:
       - server
-    command: ["src", "trade"]
+    command: ["trade", "trade"]
 
 
 networks:

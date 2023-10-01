@@ -6,7 +6,7 @@ authors = ["Roman <iamromandev@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
-trade = "trade.cli:app"
+trade = "src.trade.cli:app"
 
 [tool.poetry.dependencies]
 python = "3.9.16"

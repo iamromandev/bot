@@ -2,7 +2,7 @@ from typing import Optional
 
 import typer
 
-from trade import __app_name__, __version__
+from src.trade import __app_name__, __version__
 
 app = typer.Typer()
 

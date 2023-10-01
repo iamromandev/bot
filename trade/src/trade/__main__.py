@@ -1,4 +1,4 @@
-from trade import cli, __app_name__
+from src.trade import cli, __app_name__
 
 
 def main():
