@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "trade"
+version = "0.0.1"
+description = ""
+authors = ["Roman <iamromandev@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+trade = "src.trade.cli:main"
+
+[tool.poetry.dependencies]
+python = "3.9.16"
+## reserved packages
+requests = "2.29.0" # for namecheap host issue
+## end reserved packages
+## core
+loguru = "0.7.2"
+coreapi = "2.3.3" # must be installed for TokenAuthentication
+## storage
+# db
+sqlmodel = "0.0.8"
+alembic = "1.12.0"
+## cli
+typer = {extras = ["all"], version = "0.9.0"}
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "3.3.2"
+
+[tool.black]
+line-length = 120
+target-version = ['py39']
+include = '\.pyi?$'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
