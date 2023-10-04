@@ -3,23 +3,22 @@ services:
     platform: linux/arm64
     hostname: server
     container_name: server
-    restart: unless-stopped
+    #restart: unless-stopped
+    #stdin_open: true # docker run -i
+    #tty: true        # docker run -t
     build:
       context: .
       dockerfile: dockerfile
-      target: local
       args:
         ENV: local
         WORK_DIR: /workdir
-        PYTHON_VERSION: 3.9.16
+        PYTHON_VERSION: 3.11.4
         POETRY_VERSION: 1.5.1
-    ports:
-      - 8010:8000
     volumes:
       - .:/workdir
     networks:
       - server
-    command: ["trade", "trade"]
+    command: tail -f /dev/null # running container
 
 
 networks:

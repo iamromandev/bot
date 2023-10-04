@@ -1,9 +1,0 @@
-### ignore ###
-__pycache__
-poetry.lock
-
-# ignore generated files
-**/*.pyc
-
-### allow ###
-!.env.example
