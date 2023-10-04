@@ -1,0 +1,20 @@
+### base image ###
+ARG PYTHON_VERSION=3.11.4
+
+FROM python:$PYTHON_VERSION
+# workdir
+ARG WORK_DIR
+ENV WORK_DIR=$WORK_DIR
+
+WORKDIR $WORK_DIR
+COPY . $WORK_DIR
+
+# install runtime deps - uses $POETRY_VIRTUALENVS_IN_PROJECT internally
+# RUN poetry install --sync
+RUN pip3 install -e .
+
+# Forever running
+CMD ["tail", "-f", "/dev/null"]
+#ENTRYPOINT ["cli"]
+# Default to trade mode
+#CMD [ "bash" ]
