@@ -6,6 +6,6 @@ setup(
     packages=['cli'],
     entry_points={
         'console_scripts': [
-            'cli = cli.__main__:main'
+            'cli = src.cli.__main__:main'
         ]
     })
