@@ -1,0 +1,23 @@
+services:
+  server:
+    platform: linux/arm64
+    hostname: server
+    container_name: server
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        ENV: local
+        WORK_DIR: /workdir
+        PYTHON_VERSION: 3.11.4
+        POETRY_VERSION: 1.6.1
+    volumes:
+      - .:/workdir
+    networks:
+      - server
+    command: tail -f /dev/null # running container
+
+networks:
+  server:
+    name: server
+    driver: bridge
