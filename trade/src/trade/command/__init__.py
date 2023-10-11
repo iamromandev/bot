@@ -1,0 +1,1 @@
+from trade.command.arguments import Arguments
