@@ -2,9 +2,10 @@ import argparse
 
 from typing import Optional, List, Dict, Any
 
-from .cli import OPTIONS
+from trade.command.cli import OPTIONS
 
 ARGS_COMMON = ["verbosity", "version"]
+ARGS_START = ["dry_run"]
 
 
 class Arguments:
@@ -38,3 +39,19 @@ class Arguments:
         # main parser
         self.parser = argparse.ArgumentParser(description="Crypto Trading Bot")
         self._build_arguments(parser=self.parser, options=["version"])
+
+        # sub parsers
+        sub_parsers = self.parser.add_subparsers(dest="command")
+
+        # start subcommand
+        from trade.command import (
+            start_trade
+        )
+        start_cmd = sub_parsers.add_parser(
+            "start",
+            help="Start Trade Module.",
+            parents=[common_parser]
+        )
+        start_cmd.set_defaults(func=start_trade)
+        self._build_arguments(parser=start_cmd, options=ARGS_START)
+

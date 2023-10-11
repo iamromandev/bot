@@ -20,5 +20,11 @@ OPTIONS: Dict[str, Arg] = {
         "-V", "--version",
         action="version",
         version=f"%(prog)s {__version__}"
-    )
+    ),
+    # start trade
+    "dry_run": Arg(
+        '--dry-run',
+        help='Enforce dry-run for trading (removes Exchange secrets and simulates trades).',
+        action='store_true',
+    ),
 }

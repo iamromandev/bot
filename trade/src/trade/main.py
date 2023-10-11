@@ -2,6 +2,9 @@ import sys
 
 from typing import Optional, List, Any
 
+from loguru import logger
+
+from trade import __version__
 from trade.command import Arguments
 
 
@@ -14,17 +17,20 @@ def main(sysargv: Optional[List[str]] = None) -> None:
 
     return_code: Any = 1
     try:
-        print("Lal Lal")
-        print(sysargv)
-
         arguments = Arguments(sysargv)
         args = arguments.parsed_args
-        print(args)
-    except Exception:
-        pass
+        logger.info(f"Args: {args}")
+
+        # call sub commands
+        if "func" in args:
+            logger.info(f"trade {__version__}")
+            return_code = args["func"](args)
+
+    except Exception as e:
+        logger.error(str(e))
+        logger.exception("Fatal exception!")
     finally:
-        sys.exit(1)
-    pass
+        sys.exit(return_code)
 
 
 if __name__ == '__main__':  # pragma: no cover

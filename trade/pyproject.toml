@@ -6,12 +6,12 @@ authors = ["Roman <iamromandev@gmail.com>"]
 readme = "README.md"
 packages = [{include = "trade", from = "src"}]
 
-
 [tool.poetry.scripts]
 trade = "trade.main:main"
 
 [tool.poetry.dependencies]
 python = "3.11.4"
+loguru = "0.7.2"
 
 [build-system]
 requires = ["poetry-core"]
