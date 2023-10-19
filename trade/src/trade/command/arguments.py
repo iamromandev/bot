@@ -4,8 +4,10 @@ from typing import Optional, List, Dict, Any
 
 from trade.command.cli import OPTIONS
 
-ARGS_COMMON = ["verbosity", "version"]
+ARGS_COMMON = ["verbosity", "version", "logfile", "config", "datadir"]
+ARGS_STRATEGY = ["strategy"]
 ARGS_START = ["dry_run"]
+ARGS_DATA_DIR = ["datadir"]
 
 
 class Arguments:
@@ -33,8 +35,13 @@ class Arguments:
 
         # common parser
         common_parser = argparse.ArgumentParser(add_help=False)
-        group = common_parser.add_argument_group("Common Arguments")
-        self._build_arguments(parser=group, options=ARGS_COMMON)
+        common_group = common_parser.add_argument_group("Common Arguments")
+        self._build_arguments(parser=common_group, options=ARGS_COMMON)
+
+        # strategy parser
+        strategy_parser = argparse.ArgumentParser(add_help=False)
+        strategy_group = common_parser.add_argument_group("Strategy Arguments")
+        self._build_arguments(parser=strategy_group, options=ARGS_STRATEGY)
 
         # main parser
         self.parser = argparse.ArgumentParser(description="Crypto Trading Bot")
@@ -45,13 +52,22 @@ class Arguments:
 
         # start subcommand
         from trade.command import (
-            start_trade
+            start_trade,
+            create_datadir
         )
-        start_cmd = sub_parsers.add_parser(
+        start_subcommand = sub_parsers.add_parser(
             "start",
             help="Start Trade Module.",
-            parents=[common_parser]
+            parents=[common_parser, strategy_parser]
         )
-        start_cmd.set_defaults(func=start_trade)
-        self._build_arguments(parser=start_cmd, options=ARGS_START)
+        start_subcommand.set_defaults(func=start_trade)
+        self._build_arguments(parser=start_subcommand, options=ARGS_START)
+
+        # data dir subcommand
+        datadir_subcommand = sub_parsers.add_parser(
+            "create-datadir",
+            help="Create Data Directory."
+        )
+        datadir_subcommand.set_defaults(func=create_datadir)
+        self._build_arguments(parser=datadir_subcommand, options=ARGS_DATA_DIR)
 
