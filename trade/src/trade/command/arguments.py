@@ -7,8 +7,8 @@ from trade.command.cli import OPTIONS
 ARGS_COMMON = ["verbosity", "version", "logfile", "config", "datadir"]
 ARGS_STRATEGY = ["strategy"]
 ARGS_START = ["dry_run"]
-ARGS_DATA_DIR = ["datadir"]
-
+ARGS_DATA_DIR = ["datadir", "reset"]
+ARGS_CONFIG = ["config"]
 
 class Arguments:
     def __init__(self, args: Optional[List[str]]) -> None:
@@ -50,24 +50,34 @@ class Arguments:
         # sub parsers
         sub_parsers = self.parser.add_subparsers(dest="command")
 
-        # start subcommand
+        # start
         from trade.command import (
             start_trade,
-            create_datadir
+            create_datadir,
+            start_new_config,
         )
         start_subcommand = sub_parsers.add_parser(
             "start",
-            help="Start Trade Module.",
+            help="Start trade module.",
             parents=[common_parser, strategy_parser]
         )
         start_subcommand.set_defaults(func=start_trade)
         self._build_arguments(parser=start_subcommand, options=ARGS_START)
 
-        # data dir subcommand
+        # datadir
         datadir_subcommand = sub_parsers.add_parser(
             "create-datadir",
-            help="Create Data Directory."
+            help="Create data directory."
         )
         datadir_subcommand.set_defaults(func=create_datadir)
         self._build_arguments(parser=datadir_subcommand, options=ARGS_DATA_DIR)
+
+        # config
+        config_subcommand = sub_parsers.add_parser(
+            "new-config",
+            help="Create new config."
+        )
+        config_subcommand.set_defaults(func=start_new_config)
+        self._build_arguments(parser=config_subcommand, options=ARGS_CONFIG)
+
 

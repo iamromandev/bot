@@ -19,7 +19,7 @@ def main(sysargv: Optional[List[str]] = None) -> None:
     try:
         arguments = Arguments(sysargv)
         args = arguments.parsed_args
-        logger.info(f"Args: {args}")
+        logger.info(f"Parsed Arguments: {args}")
 
         # call sub commands
         if "func" in args:

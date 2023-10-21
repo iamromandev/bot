@@ -42,6 +42,11 @@ OPTIONS: Dict[str, Arg] = {
         help="Path to directory with all data.",
         metavar="PATH",
     ),
+    "reset": Arg(
+        "--reset",
+        help="Reset sample files to their original state.",
+        action="store_true",
+    ),
 
     # strategy options
     "strategy": Arg(
